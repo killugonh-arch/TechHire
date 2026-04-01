@@ -1,0 +1,175 @@
+{
+  "info": {
+    "name": "TechHire Job Board API",
+    "_postman_id": "techhire-collection-v1",
+    "description": "Four saved requests covering JWT auth, unauthenticated browsing, premium access, and single-job detail for the TechHire Premium Job Board API.\n\n**Base URL**: http://127.0.0.1:8000\n\n**Quick start**\n1. Run `python manage.py seed_data` to create users and job postings.\n2. Fire request #1 to get a JWT token, then copy the `access` value into the `{{access_token}}` collection variable.\n3. Run requests #2–4 to observe field-level masking in action.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000",
+      "type": "string"
+    },
+    {
+      "key": "access_token",
+      "value": "PASTE_YOUR_ACCESS_TOKEN_HERE",
+      "type": "string",
+      "description": "JWT access token for a Premium user. Obtained from request #1."
+    }
+  ],
+  "item": [
+    {
+      "name": "1 · POST — Get JWT Token (premium_user)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"premium_user\",\n  \"password\": \"Pass1234!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/token/",
+          "host": ["{{base_url}}"],
+          "path": ["api", "token", ""]
+        },
+        "description": "Exchanges credentials for a JWT access + refresh token pair.\n\nCopy the `access` value from the response and paste it into the `access_token` collection variable to authenticate requests #3 and #4.\n\n**Credentials used**: premium_user / Pass1234!\nSwap for `basic_user` / `Pass1234!` to test the locked (Basic) view."
+      },
+      "response": [
+        {
+          "name": "200 OK — Token pair",
+          "status": "OK",
+          "code": 200,
+          "header": [{"key": "Content-Type", "value": "application/json"}],
+          "body": "{\n  \"access\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "2 · GET — Unauthenticated Search & Filter (locked fields)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/jobs/?search=engineer&location=Remote&page=1",
+          "host": ["{{base_url}}"],
+          "path": ["api", "jobs", ""],
+          "query": [
+            {
+              "key": "search",
+              "value": "engineer",
+              "description": "Full-text search across title and description."
+            },
+            {
+              "key": "location",
+              "value": "Remote",
+              "description": "Exact filter by location field."
+            },
+            {
+              "key": "page",
+              "value": "1",
+              "description": "Page number (10 results per page)."
+            }
+          ]
+        },
+        "description": "No Authorization header is sent.\n\nExpected behaviour: the response returns job objects but `company_name`, `salary_range`, and `application_link` are all replaced with `\"🔒 Premium Feature\"`.\n\nThis demonstrates that anyone can browse the board, but the sensitive details are hidden behind the paywall."
+      },
+      "response": [
+        {
+          "name": "200 OK — Locked fields example",
+          "status": "OK",
+          "code": 200,
+          "header": [{"key": "Content-Type", "value": "application/json"}],
+          "body": "{\n  \"count\": 8,\n  \"next\": null,\n  \"previous\": null,\n  \"results\": [\n    {\n      \"id\": 1,\n      \"title\": \"Senior Backend Engineer\",\n      \"description\": \"Design and build scalable microservices...\",\n      \"location\": \"Remote\",\n      \"company_name\": \"🔒 Premium Feature\",\n      \"salary_range\": \"🔒 Premium Feature\",\n      \"application_link\": \"🔒 Premium Feature\",\n      \"created_at\": \"2025-01-15T10:00:00Z\"\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "3 · GET — Authenticated as Premium User (unlocked fields)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "description": "Replace {{access_token}} with the `access` value from request #1."
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/jobs/?search=engineer&location=Remote&page=1",
+          "host": ["{{base_url}}"],
+          "path": ["api", "jobs", ""],
+          "query": [
+            {
+              "key": "search",
+              "value": "engineer"
+            },
+            {
+              "key": "location",
+              "value": "Remote"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            }
+          ]
+        },
+        "description": "Sends the JWT access token for `premium_user` in the Authorization header.\n\nExpected behaviour: **identical URL** to request #2, but now `company_name`, `salary_range`, and `application_link` contain the real data.\n\nThis proves field-level masking is driven entirely by the serializer — no separate endpoint needed."
+      },
+      "response": [
+        {
+          "name": "200 OK — Unlocked fields example",
+          "status": "OK",
+          "code": 200,
+          "header": [{"key": "Content-Type", "value": "application/json"}],
+          "body": "{\n  \"count\": 8,\n  \"next\": null,\n  \"previous\": null,\n  \"results\": [\n    {\n      \"id\": 1,\n      \"title\": \"Senior Backend Engineer\",\n      \"description\": \"Design and build scalable microservices...\",\n      \"location\": \"Remote\",\n      \"company_name\": \"Stripe\",\n      \"salary_range\": \"$180,000 – $220,000\",\n      \"application_link\": \"https://stripe.com/jobs/senior-backend-engineer\",\n      \"created_at\": \"2025-01-15T10:00:00Z\"\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "4 · GET — Single Job Detail View",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "description": "Optional — omit to see locked fields, include for premium view."
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/jobs/1/",
+          "host": ["{{base_url}}"],
+          "path": ["api", "jobs", "1", ""]
+        },
+        "description": "Retrieves a single job posting by its primary key.\n\nThe same field-level masking logic applies based on whether a valid Premium JWT is provided.\n\nChange `1` in the URL to any valid job ID. If no job with that ID exists the API returns `404 Not Found`."
+      },
+      "response": [
+        {
+          "name": "200 OK — Single job (premium view)",
+          "status": "OK",
+          "code": 200,
+          "header": [{"key": "Content-Type", "value": "application/json"}],
+          "body": "{\n  \"id\": 1,\n  \"title\": \"Senior Backend Engineer\",\n  \"description\": \"Design and build scalable microservices in Python/Django...\",\n  \"location\": \"Remote\",\n  \"company_name\": \"Stripe\",\n  \"salary_range\": \"$180,000 – $220,000\",\n  \"application_link\": \"https://stripe.com/jobs/senior-backend-engineer\",\n  \"created_at\": \"2025-01-15T10:00:00Z\"\n}"
+        },
+        {
+          "name": "404 Not Found",
+          "status": "Not Found",
+          "code": 404,
+          "header": [{"key": "Content-Type", "value": "application/json"}],
+          "body": "{\n  \"detail\": \"No JobPosting matches the given query.\"\n}"
+        }
+      ]
+    }
+  ]
+}
