@@ -18,26 +18,19 @@ class JobPostingFilter(filters.FilterSet):
 
 class JobPostingListView(generics.ListAPIView):
     """
-    GET /api/jobs/
+    Lists all job postings related on field of Technology, newest first.
+    Premium-only fields are masked for unauthenticated or Basic users.
 
-    Lists all job postings, newest first.
-    Premium-only fields are masked for unauthenticated / Basic users.
-
-    Query parameters:
-      ?search=<term>       – searches title & description (case-insensitive)
-      ?location=<value>    – partial (contains) filter by location, matches on every letter typed
-      ?ordering=created_at – explicit sort (default is already -created_at)
-      ?page=<n>            – page number (10 results per page)
     """
     queryset = JobPosting.objects.all().order_by('-created_at')
     serializer_class = JobPostingSerializer
     permission_classes = [AllowAny]
 
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    filterset_class = JobPostingFilter              # ?location=Rem → matches "Remote"
-    search_fields = ['title', 'description']       # ?search=python
+    filterset_class = JobPostingFilter              
+    search_fields = ['title', 'description']       
     ordering_fields = ['created_at']
-    ordering = ['-created_at']                     # Default: newest first
+    ordering = ['-created_at']                     
 
 
 class JobPostingDetailView(generics.RetrieveAPIView):
