@@ -9,8 +9,9 @@ from .serializers import JobPostingSerializer
 
 class JobPostingListView(generics.ListAPIView):
     """
-    GET /api/jobs/
-
+    Lists of all job postings related on field of technology, newest to latest first.
+    Premium-only fields are masked for unauthenticated or Basic users.
+    """
    
     queryset = JobPosting.objects.all().order_by('-created_at')
     serializer_class = JobPostingSerializer
