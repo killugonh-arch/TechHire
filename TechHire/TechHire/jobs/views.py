@@ -11,12 +11,7 @@ class JobPostingListView(generics.ListAPIView):
     """
     GET /api/jobs/
 
-    Query parameters:
-      ?search=<term>       – searches title & description (case-insensitive)
-      ?location=<value>    – exact filter by location
-      ?ordering=created_at – explicit sort (default is already -created_at)
-      ?page=<n>            – page number (10 results per page)
-    """
+   
     queryset = JobPosting.objects.all().order_by('-created_at')
     serializer_class = JobPostingSerializer
     permission_classes = [AllowAny]
