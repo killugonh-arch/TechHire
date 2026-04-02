@@ -18,187 +18,124 @@ from jobs.models import UserProfile, JobPosting
 
 JOBS = [
     {
-        "title": "Senior Backend Engineer",
-        "description": (
-            "Design and build scalable microservices in Python/Django. "
-            "You will own the architecture of our core API layer, mentor "
-            "junior engineers, and collaborate closely with product. "
-            "Experience with PostgreSQL, Redis, and Docker required."
-        ),
-        "location": "Remote",
-        "company_name": "Stripe",
-        "salary_range": "$180,000 – $220,000",
-        "application_link": "https://stripe.com/jobs/senior-backend-engineer",
+        "title": "Senior Software Engineer",
+        "description": "Build and maintain web applications using Python/Django. PRC license and experience with PostgreSQL and Docker required.",
+        "location": "Makati, Metro Manila",
+        "company_name": "Ayala Corporation",
+        "salary_range": "₱80,000 – ₱120,000",
+        "application_link": "https://careers.ayala.com/senior-software-engineer",
     },
     {
-        "title": "Frontend Engineer (React)",
-        "description": (
-            "Build pixel-perfect, accessible UIs using React and TypeScript. "
-            "You'll work in a small, fast-moving team shipping features weekly. "
-            "Strong CSS fundamentals and a passion for performance required."
-        ),
-        "location": "San Francisco, CA",
-        "company_name": "Linear",
-        "salary_range": "$160,000 – $200,000",
-        "application_link": "https://linear.app/jobs/frontend-engineer",
+        "title": "Registered Nurse",
+        "description": "Provide direct patient care including assessment and medication administration. PRC license and BLS certification required.",
+        "location": "Cebu City, Cebu",
+        "company_name": "Chong Hua Hospital",
+        "salary_range": "₱25,000 – ₱40,000",
+        "application_link": "https://chonghua.com.ph/careers/registered-nurse",
     },
     {
-        "title": "Staff Software Engineer",
-        "description": (
-            "Lead cross-functional technical initiatives at the staff level. "
-            "Drive architectural decisions, define engineering standards, and "
-            "partner with Product and Design to ship impactful products. "
-            "10+ years of industry experience preferred."
-        ),
-        "location": "New York, NY",
-        "company_name": "Figma",
-        "salary_range": "$220,000 – $280,000",
-        "application_link": "https://figma.com/careers/staff-software-engineer",
+        "title": "General Physician",
+        "description": "Conduct medical consultations and prescribe treatments for outpatient and inpatient cases. PRC license with 2 years experience required.",
+        "location": "Tacloban, Leyte",
+        "company_name": "Eastern Visayas Regional Medical Center",
+        "salary_range": "₱60,000 – ₱90,000",
+        "application_link": "https://evrmc.doh.gov.ph/careers/general-physician",
     },
     {
-        "title": "DevOps / Platform Engineer",
-        "description": (
-            "Manage our Kubernetes clusters, CI/CD pipelines, and cloud "
-            "infrastructure on AWS. Improve reliability, observability, and "
-            "developer experience. Terraform and Helm experience a plus."
-        ),
-        "location": "Remote",
-        "company_name": "Vercel",
-        "salary_range": "$155,000 – $190,000",
-        "application_link": "https://vercel.com/careers/devops-platform-engineer",
+        "title": "Civil Engineer",
+        "description": "Oversee construction projects and conduct site inspections. PRC license and AutoCAD experience required.",
+        "location": "Davao City, Davao del Sur",
+        "company_name": "DMCI Holdings",
+        "salary_range": "₱35,000 – ₱60,000",
+        "application_link": "https://dmci.com.ph/jobs/civil-engineer",
     },
     {
-        "title": "Machine Learning Engineer",
-        "description": (
-            "Train and deploy production ML models for ranking and recommendations. "
-            "Work with large-scale data pipelines and collaborate with research "
-            "scientists. Proficiency in Python, PyTorch, and MLflow expected."
-        ),
-        "location": "Seattle, WA",
-        "company_name": "Spotify",
-        "salary_range": "$190,000 – $240,000",
-        "application_link": "https://spotify.com/jobs/ml-engineer",
+        "title": "High School Teacher (Mathematics)",
+        "description": "Teach Math to Junior and Senior High School students under the DepEd K–12 curriculum. LET passer required.",
+        "location": "Quezon City, Metro Manila",
+        "company_name": "Ateneo de Manila University",
+        "salary_range": "₱22,000 – ₱35,000",
+        "application_link": "https://ateneo.edu/careers/hs-teacher-math",
     },
     {
-        "title": "iOS Engineer",
-        "description": (
-            "Ship delightful native iOS features used by millions of people. "
-            "Deep knowledge of Swift and UIKit required. SwiftUI and "
-            "performance profiling experience are strong bonuses."
-        ),
-        "location": "Austin, TX",
-        "company_name": "Notion",
-        "salary_range": "$150,000 – $185,000",
-        "application_link": "https://notion.so/careers/ios-engineer",
+        "title": "Accountant",
+        "description": "Manage financial records and prepare BIR tax reports. CPA license and experience with QuickBooks or SAP preferred.",
+        "location": "Pasig, Metro Manila",
+        "company_name": "SM Investments Corporation",
+        "salary_range": "₱30,000 – ₱55,000",
+        "application_link": "https://sminvestments.com/careers/accountant",
     },
     {
-        "title": "Android Engineer",
-        "description": (
-            "Build and maintain our Android app in Kotlin. You'll own key "
-            "features end-to-end from design review through production. "
-            "Experience with Jetpack Compose and offline-first architecture is a plus."
-        ),
-        "location": "Remote",
-        "company_name": "Duolingo",
-        "salary_range": "$140,000 – $175,000",
-        "application_link": "https://duolingo.com/jobs/android-engineer",
+        "title": "Electrical Engineer",
+        "description": "Design and maintain electrical systems for commercial facilities. PRC license required; AutoCAD Electrical experience is a plus.",
+        "location": "Iloilo City, Iloilo",
+        "company_name": "Aboitiz Power Corporation",
+        "salary_range": "₱35,000 – ₱65,000",
+        "application_link": "https://aboitizpower.com/careers/electrical-engineer",
     },
     {
-        "title": "Security Engineer",
-        "description": (
-            "Identify and remediate vulnerabilities across our product and "
-            "infrastructure. Conduct threat modeling, penetration testing, "
-            "and security code reviews. OSCP or equivalent certification preferred."
-        ),
-        "location": "Washington, DC",
-        "company_name": "Cloudflare",
-        "salary_range": "$170,000 – $210,000",
-        "application_link": "https://cloudflare.com/careers/security-engineer",
+        "title": "Physical Therapist",
+        "description": "Provide rehabilitation services and develop treatment plans for patients. Valid PRC license required.",
+        "location": "Bacolod, Negros Occidental",
+        "company_name": "Corazon Locsin Montelibano Memorial Regional Hospital",
+        "salary_range": "₱22,000 – ₱35,000",
+        "application_link": "https://clmmrh.doh.gov.ph/careers/physical-therapist",
     },
     {
-        "title": "Full Stack Engineer",
-        "description": (
-            "Work across the entire stack — Next.js on the frontend, FastAPI "
-            "on the backend — to deliver new product features. You'll be "
-            "one of the first 20 engineers at a well-funded seed-stage startup."
-        ),
-        "location": "Remote",
-        "company_name": "Loom",
-        "salary_range": "$130,000 – $165,000",
-        "application_link": "https://loom.com/jobs/full-stack-engineer",
+        "title": "Call Center Agent (Customer Service)",
+        "description": "Handle inbound and outbound calls for international clients. Strong English communication skills required. Fresh graduates welcome.",
+        "location": "Pasay, Metro Manila",
+        "company_name": "Concentrix Philippines",
+        "salary_range": "₱18,000 – ₱28,000",
+        "application_link": "https://concentrix.com/ph/careers/call-center-agent",
     },
     {
-        "title": "Data Engineer",
-        "description": (
-            "Build and maintain our dbt + Airflow data platform. Partner with "
-            "analysts and scientists to deliver reliable, well-documented datasets. "
-            "Strong SQL skills and experience with Snowflake or BigQuery required."
-        ),
-        "location": "Chicago, IL",
-        "company_name": "Brex",
-        "salary_range": "$145,000 – $180,000",
-        "application_link": "https://brex.com/careers/data-engineer",
+        "title": "Agricultural Technician",
+        "description": "Assist farmers with modern techniques and conduct field visits for pest control and soil management guidance.",
+        "location": "Cabanatuan, Nueva Ecija",
+        "company_name": "Department of Agriculture – Region III",
+        "salary_range": "₱18,000 – ₱28,000",
+        "application_link": "https://da.gov.ph/careers/agricultural-technician",
     },
     {
-        "title": "Site Reliability Engineer (SRE)",
-        "description": (
-            "Ensure 99.99% uptime for our globally distributed platform. "
-            "Write runbooks, define SLOs, and participate in on-call rotations. "
-            "Strong Linux, networking, and observability (Datadog/Prometheus) skills needed."
-        ),
-        "location": "Remote",
-        "company_name": "PlanetScale",
-        "salary_range": "$160,000 – $200,000",
-        "application_link": "https://planetscale.com/jobs/sre",
+        "title": "Pharmacist",
+        "description": "Dispense medications and ensure compliance with PDEA and FDA regulations. PRC license required.",
+        "location": "Cagayan de Oro, Misamis Oriental",
+        "company_name": "Mercury Drug Corporation",
+        "salary_range": "₱28,000 – ₱45,000",
+        "application_link": "https://mercurydrug.com/careers/pharmacist",
     },
     {
-        "title": "Backend Engineer – Payments",
-        "description": (
-            "Build robust, compliant payment flows handling billions of dollars "
-            "annually. Deep familiarity with financial systems, idempotency, "
-            "and distributed transactions required. Go or Rust experience preferred."
-        ),
-        "location": "New York, NY",
-        "company_name": "Ramp",
-        "salary_range": "$175,000 – $215,000",
-        "application_link": "https://ramp.com/careers/backend-payments",
+        "title": "Architect",
+        "description": "Prepare architectural designs for residential and commercial projects. PRC license and Revit or SketchUp skills required.",
+        "location": "Taguig, Metro Manila",
+        "company_name": "Rockwell Land Corporation",
+        "salary_range": "₱40,000 – ₱75,000",
+        "application_link": "https://rockwellland.com.ph/careers/architect",
     },
     {
-        "title": "Developer Advocate",
-        "description": (
-            "Champion our developer platform through talks, blog posts, sample "
-            "apps, and community engagement. You bridge Engineering and our "
-            "external developer community. Public speaking and writing chops essential."
-        ),
-        "location": "Remote",
-        "company_name": "Twilio",
-        "salary_range": "$125,000 – $155,000",
-        "application_link": "https://twilio.com/jobs/developer-advocate",
+        "title": "Social Worker",
+        "description": "Provide casework services to vulnerable individuals and families. Conduct home visits and coordinate with LGUs. RSW license required.",
+        "location": "Zamboanga City, Zamboanga del Sur",
+        "company_name": "Department of Social Welfare and Development",
+        "salary_range": "₱20,000 – ₱33,000",
+        "application_link": "https://dswd.gov.ph/careers/social-worker",
     },
     {
-        "title": "Embedded Systems Engineer",
-        "description": (
-            "Write firmware in C/C++ for next-generation hardware products. "
-            "Experience with RTOS, low-power design, and hardware bring-up is required. "
-            "Familiarity with BLE and Wi-Fi protocols is a strong plus."
-        ),
-        "location": "San Jose, CA",
-        "company_name": "Anker",
-        "salary_range": "$135,000 – $170,000",
-        "application_link": "https://anker.com/careers/embedded-systems-engineer",
+        "title": "Mechanical Engineer",
+        "description": "Install and maintain mechanical systems including HVAC and production machinery. PRC license required.",
+        "location": "Laguna, Calabarzon",
+        "company_name": "Toyota Motor Philippines",
+        "salary_range": "₱35,000 – ₱65,000",
+        "application_link": "https://toyota.com.ph/careers/mechanical-engineer",
     },
     {
-        "title": "Engineering Manager – Platform",
-        "description": (
-            "Lead a team of 6 platform engineers building the foundational "
-            "infrastructure that powers all product teams. You'll hire, grow, "
-            "and retain top talent while staying technically engaged. "
-            "Prior IC experience at senior level required."
-        ),
-        "location": "Remote",
-        "company_name": "Retool",
-        "salary_range": "$200,000 – $250,000",
-        "application_link": "https://retool.com/careers/engineering-manager-platform",
+        "title": "Hotel Front Desk Officer",
+        "description": "Assist guests with check-in, check-out, and reservations. HRM or Tourism degree preferred.",
+        "location": "Boracay, Aklan",
+        "company_name": "Shangri-La Boracay Resort",
+        "salary_range": "₱18,000 – ₱28,000",
+        "application_link": "https://shangri-la.com/boracay/careers/front-desk-officer",
     },
 ]
 
