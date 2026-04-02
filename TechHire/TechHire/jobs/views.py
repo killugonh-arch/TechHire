@@ -11,9 +11,6 @@ class JobPostingListView(generics.ListAPIView):
     """
     GET /api/jobs/
 
-    Lists all job postings, newest first.
-    Premium-only fields are masked for unauthenticated / Basic users.
-
     Query parameters:
       ?search=<term>       – searches title & description (case-insensitive)
       ?location=<value>    – exact filter by location
