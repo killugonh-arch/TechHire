@@ -37,8 +37,6 @@ class JobPostingDetailView(generics.RetrieveAPIView):
     """
     GET /api/jobs/<id>/
 
-    Returns a single job posting.
-    Same field-level masking applies based on the requester's membership tier.
     """
     queryset = JobPosting.objects.all()
     serializer_class = JobPostingSerializer
