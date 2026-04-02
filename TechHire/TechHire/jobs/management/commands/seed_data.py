@@ -1,16 +1,4 @@
-"""
-Management command: seed_data
 
-Creates two test users and 15 sample job postings.
-
-Usage:
-    python manage.py seed_data
-
-Users created:
-    basic_user   / password: Pass1234!   →  Basic tier
-    premium_user / password: Pass1234!   →  Premium tier
-    admin        / password: admin123    →  Django superuser (Premium tier)
-"""
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from jobs.models import UserProfile, JobPosting
